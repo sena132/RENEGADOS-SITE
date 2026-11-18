@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renegados | Guilda Wild Rift</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0914;
+            --card-bg: #151124;
+            --primary: #9b51e0;
+            --primary-hover: #b86eff;
+            --accent: #f2c94c;
+            --text-main: #f0f0f5;
+            --text-muted: #a09cb0;
+            --border-color: #2e264d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(11, 9, 20, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--accent);
+            text-shadow: 0 0 10px rgba(242, 201, 76, 0.4);
+            letter-spacing: 2px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary-hover);
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(180deg, rgba(155,81,224,0.15) 0%, rgba(11,9,20,1) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(155, 81, 224, 0.6);
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .invite-box {
+            background: rgba(155, 81, 224, 0.1);
+            border: 1px dashed var(--primary);
+            padding: 15px 20px;
+            border-radius: 8px;
+            max-width: 650px;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+            color: #dcd7f7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-discord {
+            background-color: #5865F2;
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-whatsapp {
+            background-color: #25D366;
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 80px 10% 40px;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .about-card, .form-container, .rules-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+        }
+
+        .about-card p, .rules-card p {
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .rules-list {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .rules-list li {
+            background: rgba(11, 9, 20, 0.6);
+            border-left: 4px solid var(--accent);
+            padding: 12px 15px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .rules-list li strong {
+            color: var(--accent);
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 350px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            background: rgba(155, 81, 224, 0.1);
+            border-left: 3px solid var(--primary);
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .message span {
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid var(--border-color);
+            padding: 10px;
+            background: #110d1e;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 10px;
+            color: white;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-input-area button:hover {
+            background: var(--primary-hover);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        form label {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 12px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: white;
+            outline: none;
+        }
+
+        form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        form button:hover {
+            background: var(--primary-hover);
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+
+        @media(max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">RENEGADOS</div>
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#sobre">Sobre</a>
+            <a href="#regras">Regras</a>
+            <a href="#chat">Bate-Papo</a>
+            <a href="#alistamento">Alistamento</a>
+        </nav>
+    </header>
+
+    <section id="inicio" class="hero">
+        <h1>RENEGADOS WILD RIFT</h1>
+        <p>"Amizade, diversão, bate-papo de qualidade e muita jogatina no Wild Rift."</p>
+        
+        <div class="invite-box">
+            <strong>Use esse link para chamar seus best friends e fazer parte dos Renegados!</strong><br>
+            Todos são bem-vindos, desde que estejam dentro das nossas regras! Aproveitem meus amores! ❤️<br>
+            👉 <a href="https://discord.gg/AyVRKQhjN2" target="_blank" style="color: var(--accent);">https://discord.gg/AyVRKQhjN2</a>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="https://discord.gg/AyVRKQhjN2" target="_blank" class="btn btn-discord">🎙️ Entrar na Call (Discord)</a>
+            <a href="https://wa.me/558496013435" target="_blank" class="btn btn-whatsapp">💬 Chamar no WhatsApp</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2 class="section-title">Sobre a Guilda</h2>
+        <div class="about-card">
+            <p>Seja bem-vindo à <strong>Renegados</strong>! Nossa guilda não é apenas sobre subir elos ou focar em ranking estressante; nosso foco principal é <strong>conhecer pessoas novas</strong>, dar boas risadas na call e fechar aquela partida de Wild Rift com a galera.</p>
+            <p>Se você procura um lugar acolhedor para trocar ideia todos os dias, fazer amizades verdadeiras e jogar em equipe sem toxicidade, este é o seu lugar. Junte-se à nossa família!</p>
+        </div>
+    </section>
+
+    <section id="regras">
+        <h2 class="section-title">Regras do Grupo</h2>
+        <div class="rules-card">
+            <p>Para manter nossa comunidade saudável, divertida e acolhedor para todos, siga atentamente as diretrizes abaixo:</p>
+            <ul class="rules-list">
+                <li><strong>1. Proibido Crimes Hediondos:</strong> Não será tolerado em hipótese alguma qualquer conteúdo, apologia ou incentivo a crimes hediondos como homicídio, latrocínio, estupro, tortura, tráfico, etc.</li>
+                <li><strong>2. Proibido Outros Crimes:</strong> Fora os hediondos, também é proibido cometer qualquer crime: ameaça, calúnia, difamação, injúria, racismo, golpe, estelionato, compartilhar conteúdo ilegal, vazar dados, etc.</li>
+                <li><strong>3. Liberado a Resenha:</strong> Tá liberado falar o que quiser, fazer piadinha, zoar, meme, brincar. A resenha é livre!</li>
+                <li><strong>4. O Limite da Brincadeira:</strong> Piada só vale se não virar crime. Zoou, mas sem cometer crime. Ofendeu virando crime de preconceito ou ameaça? Não pode.</li>
+                <li><strong>5. Respeito e Cortesia:</strong> Dar bom dia às mulheres do grupo e sempre elogiá-las com respeito.</li>
+                <li><strong>6. Proibido Política:</strong> Discussões ou propagandas político-partidárias são terminantemente proibidas no grupo.</li>
+            </ul>
+            <p style="margin-top: 20px; text-align: center; color: var(--accent);"><strong>Resumo:</strong> Pode brincar à vontade e curtir a resenha, mas sem cometer crime nenhum e sem falar de política!</p>
+        </div>
+    </section>
+
+    <section id="chat">
+        <h2 class="section-title">Mural de Bate-Papo da Guilda</h2>
+        <div class="chat-container">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message"><span>Stork:</span> E aí clã, quem vai fechar lobby hoje à noite?</div>
+                <div class="message"><span>Davi:</span> Eu tô dentro! Vou de ADC.</div>
+                <div class="message"><span>Renegado_Lider:</span> Bora pra call do Discord trocar ideia!</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Digite sua mensagem...">
+                <button onclick="enviarMensagem()">Enviar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="alistamento">
+        <h2 class="section-title">Alistamento de Membros</h2>
+        <div class="form-container">
+            <form id="recrutamentoForm" onsubmit="enviarAlistamento(event)">
+                <div>
+                    <label for="nick">Seu Nick / Invocador (Wild Rift):</label>
+                    <input type="text" id="nick" required placeholder="Ex: Renegado#BR1">
+                </div>
+                <div>
+                    <label for="elo">Seu Elo Atual:</label>
+                    <select id="elo">
+                        <option value="Ferro / Bronze">Ferro / Bronze</option>
+                        <option value="Prata / Ouro">Prata / Ouro</option>
+                        <option value="Platina / Esmeralda">Platina / Esmeralda</option>
+                        <option value="Diamante / Mestre">Diamante / Mestre</option>
+                        <option value="Grão-Mestre / Desafiante">Grão-Mestre / Desafiante</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="whatsappUser">Seu WhatsApp / Contato:</label>
+                    <input type="text" id="whatsappUser" required placeholder="Ex: (84) 9XXXX-XXXX">
+                </div>
+                <button type="submit">Enviar Alistamento</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Guilda Renegados • Wild Rift Brasil. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function enviarMensagem() {
+            const input = document.getElementById('chatInput');
+            const mensagemTexto = input.value.trim();
+            if (mensagemTexto === "") return;
+
+            const chatMessages = document.getElementById('chatMessages');
+            const novaMsg = document.createElement('div');
+            novaMsg.classList.add('message');
+            novaMsg.innerHTML = `<span>Você:</span> ${mensagemTexto}`;
+            
+            chatMessages.appendChild(novaMsg);
+            input.value = "";
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function enviarAlistamento(event) {
+            event.preventDefault();
+            const nick = document.getElementById('nick').value;
+            const elo = document.getElementById('elo').value;
+            const whatsapp = document.getElementById('whatsappUser').value;
+
+            alert(`Alerta: Alistamento de ${nick} enviado com sucesso! Entraremos em contato via WhatsApp.`);
+            document.getElementById('recrutamentoForm').reset();
+        }
+    </script>
+</body>
+</html>
